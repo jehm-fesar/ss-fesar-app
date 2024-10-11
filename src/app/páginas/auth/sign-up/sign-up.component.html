@@ -1,0 +1,43 @@
+<div class="form">
+    <div class="form_container">
+        <h1>Registrar usuario</h1>
+        <form [formGroup]="form" (ngSubmit)="signUp()">
+            <div>
+                <mat-form-field>
+                    <mat-label>
+                        Correo electrónico
+                    </mat-label>
+                    <input matInput formControlName="email">
+                    <mat-error *ngIf="isEmailValid as message">{{message}}</mat-error>
+                </mat-form-field>
+            </div>
+            <div>
+                <mat-form-field>
+                    <mat-label>Contraseña
+                    </mat-label>
+                    <input matInput [type]="hide ? 'password': 'text'"
+                            formControlName="psw">
+                    <mat-error>Dato requerido</mat-error>
+                    <button mat-icon-button 
+                            matSuffix (click)="hide = !hide"
+                            [attr.aria-label] = "'Hide password'"
+                            [attr.aria-pressed] = "hide"
+                            >
+                        <mat-icon>{{ hide ? "visibility_off:": "visibility" }}</mat-icon>
+                    </button>
+                </mat-form-field>
+            </div>
+            <div>
+                <button mat-flat-button
+                        type="submit">
+                    Registrar
+                </button>
+            </div>
+        </form>
+        <hr/>
+        <span class="small-text log-in-redirect">
+            ¿ya se registró?
+            <a routerLink="/auth/login">Entrar</a>
+        </span>
+    </div>
+</div>

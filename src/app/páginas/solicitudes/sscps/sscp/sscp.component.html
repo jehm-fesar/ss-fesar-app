@@ -1,0 +1,106 @@
+<div class="container">
+    <div class="form">
+        <div class="form_container">
+            <div class="card text-white bg-info mb-3" style="max-width: auto;">
+                <div class="card-header text-center">
+                    <h3>SOLICITUD DE SERVICIO DE CORRESPONDENCIA Y PAQUETERÍA</h3>
+                </div>
+            </div>
+            <hr>
+            
+            <form [formGroup]="form" (submit)="guardar()">
+                <div class="form-group">
+                    
+                    <mat-form-field class="form-control">
+                    <input matInput
+                            placeholder='Nombre de usuario o remitente'
+                            formControlName="remitente" 
+                            required/>
+                    </mat-form-field>
+                </div>
+                <br>
+                <div class="form-group">
+                    <mat-form-field class="form-control">
+                        <input matInput placeholder="Destinatario"
+                                formControlName="destinatario"
+                                required/>
+                    </mat-form-field>
+                </div>
+                <br>
+                <div class="form-group">
+                    <mat-form-field class="form-control">
+                        <input matInput placeholder="Destino (Dirección completa)"
+                                formControlName="destino"
+                                required/>
+                    </mat-form-field>
+                </div>
+                <br>
+                <hr>
+                <h5 class="text-center">FECHA DE ENTREGA DEL SERVICIO</h5>
+                <div class="form-group">
+                    <mat-form-field class="form-control">
+                        <input matInput [matDatepicker]="picker" 
+                                formControlName="entrega">
+                        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                        <mat-datepicker #picker></mat-datepicker>
+                    </mat-form-field>
+                </div>
+                <br>
+                <div class="form-group">
+                    <mat-radio-group class="form-control" formControlName="tCorrespondencia" required>TIPO DE SERVICIO:&nbsp;&nbsp;
+                        <mat-radio-button value="OFICIOS, SOBRES, CARTAS, IMPRESOS, TARJETAS">OFICIOS, SOBRES, CARTAS, IMPRESOS, TARJETAS</mat-radio-button>&nbsp;&nbsp;&nbsp;&nbsp;
+                        <mat-radio-button value="ENGARGOLADO">ENGARGOLADO</mat-radio-button>&nbsp;&nbsp;&nbsp;&nbsp;
+                        <mat-radio-button value="OTROS">OTROS</mat-radio-button>
+                    </mat-radio-group>
+                </div>
+                <br>
+                <div class="form-group">
+                    <mat-form-field class="form-control">
+                        <input matInput formControlName="cantidad"
+                                type="text" placeholder='Cantidad' required/>
+                    </mat-form-field>
+                </div>
+                <br><br>
+                <div class="form-group">
+                    <mat-radio-group class="form-control" formControlName="formaEnvio" required>FORMA DE ENVÍO:&nbsp;&nbsp;
+                        <mat-radio-button value="PROPIO">PROPIO</mat-radio-button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <mat-radio-button value="CORREO ORDINARIO">CORREO ORDINARIO</mat-radio-button>&nbsp;&nbsp;&nbsp;&nbsp;
+                        <mat-radio-button value="MENSAJERÍA ESPECIALIZADA">MENSAJERÍA ESPECIALIZADA</mat-radio-button>
+                    </mat-radio-group>
+                </div>
+                <br>
+                <div class="form-group">
+                    <mat-radio-group class="form-control" formControlName="tEnvio" required>TIPO DE ENVÍO:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <mat-radio-button value="URGENTE">URGENTE</mat-radio-button>&nbsp;&nbsp;&nbsp;&nbsp;
+                        <mat-radio-button value="ORDINARIO">ORDINARIO</mat-radio-button>
+                    </mat-radio-group>
+                </div>
+                <br>
+                <div class="form-group">
+                    <mat-radio-group class="form-control" formControlName="anexo" required>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;¿ANEXO?:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <mat-radio-button value='true'>SI</mat-radio-button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <mat-radio-button value='false'>NO</mat-radio-button>
+                    </mat-radio-group>
+                </div>
+                <br>
+                <div class="form-group">
+                    <mat-form-field class="form-control">
+                        <textarea matInput
+                                placeholder="Información adicional"
+                                cdkTextareaAutosize
+                                #autosize="cdkTextareaAutosize"
+                                cdkAutosizeMinRows="5"
+                                cdkAutosizeMaxRows="5"
+                                formControlName="infAd"></textarea>
+                    </mat-form-field>
+                </div>
+                <br>
+                <div class="d-grid gap-2">
+                    <button class="btn btn-lg btn-outline-info btn-block" mat-raised-button type="submit">
+                        <mat-icon>save</mat-icon>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

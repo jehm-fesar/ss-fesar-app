@@ -1,0 +1,66 @@
+<div class="form">
+    <div class="form_container">
+        <h3>DEPARTAMENTO</h3>
+        <form [formGroup]="form" (ngSubmit)="guardar()">
+            <div>
+                <mat-form-field class="full-width">
+                    <input matInput formControlName="departamento"
+                    placeholder="Departamento">
+                </mat-form-field>
+            </div>
+            <div>
+                <mat-form-field class="full-width">
+                    <input matInput
+                        formControlName="titular"
+                        placeholder="Titular">
+                </mat-form-field>
+            </div>
+
+            <div>
+                <mat-form-field>
+                    <input matInput readonly="true" 
+                            placeholder= '{{ correo }}'/>
+                </mat-form-field>
+            </div>
+
+            <div>
+                <mat-form-field>
+                    <input matInput 
+                        formControlName="teldirecto"
+                        placeholder="Teléfono directo"
+                            required/>
+                </mat-form-field>
+            </div>
+
+            <div>
+                <mat-form-field>
+                    <input matInput 
+                        formControlName="ext"
+                        placeholder="Primer Extensión"/>
+                </mat-form-field><br>
+            </div>
+
+            <div>
+                <mat-form-field>
+                    <input matInput
+                        formControlName="extt" 
+                        placeholder="Segunda Extensión"/>
+                </mat-form-field>
+            </div>
+
+            <div>
+                <mat-form-field>
+                    <input matInput formControlName="psw"
+                        type = "password" 
+                        placeholder="Contraseña"
+                            required/>
+                </mat-form-field>
+            </div>
+            <div>
+                <button mat-icon-button color="primary">
+                    <mat-icon>save</mat-icon>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

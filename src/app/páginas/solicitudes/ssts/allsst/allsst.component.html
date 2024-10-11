@@ -1,0 +1,97 @@
+<!--section class='listinig'-->
+    <!--div class="container"-->
+        <!--div class="demo-button-container">
+            
+            <button mat-raised-button (click)="addData()" class="demo-button">
+                <mat-icon>add</mat-icon>
+            </button>
+            <button
+                mat-raised-button
+                [disabled]="!dataToDisplay.length"
+                (click)="removeData()"
+                class="demo-button">
+                <mat-icon>delete</mat-icon>
+            </button>
+        </div-->
+        <mat-card appearance="outlined">
+            <mat-card-header>
+                <mat-card-content>
+                    <mat-card-title>
+                        Solicitudes de servicios de transporte de {{ depto }}
+                    </mat-card-title>
+                </mat-card-content>
+            </mat-card-header>
+        </mat-card>
+        <table mat-table [dataSource]="dataSource" class="mat-elevation-z8 demo-table">
+            <!-- Folio Column -->
+            <ng-container matColumnDef="folio">
+              <th mat-header-cell *matHeaderCellDef>Folio</th>
+              <td mat-cell *matCellDef="let element">{{element.folio}}</td>
+            </ng-container>
+          
+            <!-- Fecha Solicitud Column -->
+            <ng-container matColumnDef="fechaSol">
+              <th mat-header-cell *matHeaderCellDef>Fecha de <br>solicitud</th>
+              <td mat-cell *matCellDef="let element">{{element.fechaSol}}</td>
+            </ng-container>
+          
+            <!-- Departamento_id Column -->
+            <ng-container matColumnDef="departamento_id">
+              <th mat-header-cell *matHeaderCellDef>Departamento</th>
+              <td mat-cell *matCellDef="let element">{{element.departamento_id}}</td>
+            </ng-container>
+          
+            <!-- Destino Column -->
+            <ng-container matColumnDef="destino">
+              <th mat-header-cell *matHeaderCellDef>Destino</th>
+              <td mat-cell *matCellDef="let element">{{element.destino}}</td>
+            </ng-container>
+
+            <!-- SalidaSt Column -->
+            <ng-container matColumnDef="salidaSt">
+                <th mat-header-cell *matHeaderCellDef>Salida</th>
+                <td mat-cell *matCellDef="let element">{{element.salidaSt}}</td>
+            </ng-container>
+
+            <!-- RegresoSt Column -->
+            <ng-container matColumnDef="regresoSt">
+                <th mat-header-cell *matHeaderCellDef>Regreso</th>
+                <td mat-cell *matCellDef="let element">{{element.regresoSt}}</td>
+            </ng-container>
+
+            <!-- Tipo de Servicio Column -->
+            <ng-container matColumnDef="tServicio">
+                <th mat-header-cell *matHeaderCellDef>Tipo de <br>Servicio</th>
+                <td mat-cell *matCellDef="let element">{{element.tServicio}}</td>
+            </ng-container>
+
+            <!-- Tipo de transporte Column -->
+            <ng-container matColumnDef="tTransporte">
+                <th mat-header-cell *matHeaderCellDef>Tipo de <br>Transporte</th>
+                <td mat-cell *matCellDef="let element">{{element.tTansporte}}</td>
+            </ng-container>
+
+            <!-- Botones Acciones Column -->
+            <ng-container matColumnDef="acciones">
+                <th mat-header-cell *matHeaderCellDef>
+                    <button mat-raised-button (click)="onEdit()" class="demo-button">
+                        <mat-icon>add</mat-icon>
+                    </button>
+                </th>
+                <td mat-cell *matCellDef="let element">
+                    {{element.acciones}}
+                    <button mat-button>
+                        <mat-icon>edit</mat-icon>
+                    </button>
+                    <button mat-raised-button (click)="imprimir(element)">
+                        <mat-icon>print</mat-icon>
+                    </button>
+                </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+    <!--/div-->
+<!--/section-->
+

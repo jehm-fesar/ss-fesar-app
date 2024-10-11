@@ -1,0 +1,92 @@
+<div class="container">
+<div class="form">
+    <div class="form_container">
+        <div class="card text-white bg-info mb-3" style="max-width: auto;">
+            <div class="card-header text-center">
+                <h3>SOLICITUD DE SERVICIO DE TRANSPORTE</h3>
+            </div>
+        </div>
+        <hr>
+        
+        <form [formGroup]="form" (submit)="guardar()">
+            <mat-form-field class="full-width">
+                <input matInput formControlName="pasajeros"
+                    placeholder="Nombre del usuario(s)"
+                        required/>
+            </mat-form-field><br>
+            
+            <mat-form-field class="example-full-width">
+                <input matInput formControlName="destino" 
+                        placeholder="Destino (Dirección completa)"
+                        required/>
+            </mat-form-field><br>
+            
+            <mat-form-field>
+                <input matInput formControlName="nPasajeros"
+                        placeholder="Número de pasajeros"
+                        required/>
+            </mat-form-field><br>
+            
+            <h5>FECHA DE SALIDA DEL SERVICIO</h5>
+            
+            <mat-form-field>
+                <!--input matInput [(ngModel)]='this.servicios.selectedST.salidaSt'
+                        type="date" required/-->
+                <input matInput formControlName="salidaSt"
+                        [matDatepicker]="picker"
+                        mat-calendar-body>
+                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+            </mat-form-field>
+            <mat-form-field>
+                <mat-label>HORA DE SALIDA</mat-label>
+                <mat-select formControlName="horaS"
+                            required>
+                    <mat-option *ngFor="let hora of horas" [value]="hora.value">
+                    {{hora.viewValue}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+
+            <h5>FECHA DE REGRESO DEL SERVICIO</h5>
+            <mat-form-field>
+                <input matInput formControlName="regresoSt"
+                        [matDatepicker]="picker2" />
+                <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+                <mat-datepicker #picker2></mat-datepicker>
+            </mat-form-field>
+            
+            <mat-form-field appearance="fill">
+                <mat-label>HORA DE REGRESO</mat-label>
+                <mat-select formControlName="horaR">
+                    <mat-option *ngFor="let hora of horas" [value]="hora.value">
+                        {{hora.viewValue}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field><br>
+
+            <mat-radio-group formControlName="tServicio">TIPO DE SERVICIO:&nbsp;&nbsp;
+                <mat-radio-button value="LOCAL">LOCAL</mat-radio-button>&nbsp;&nbsp;&nbsp;&nbsp;
+                <mat-radio-button value="FORÁNEO">FORÁNEO</mat-radio-button>
+            </mat-radio-group><br><br>
+            <mat-radio-group formControlName="tTansporte" required>TIPO DE TRANPORTE:&nbsp;&nbsp;
+                <mat-radio-button value="PASAJEROS">PASAJEROS</mat-radio-button>&nbsp;&nbsp;&nbsp;&nbsp;
+                <mat-radio-button value="CARGA">CARGA</mat-radio-button>
+            </mat-radio-group><br>
+            
+            <mat-form-field>
+                <textarea matInput formControlName="infAd"
+                        placeholder="Información adicional"
+                        cdkTextareaAutosize
+                        #autosize="cdkTextareaAutosize"
+                        cdkAutosizeMinRows="5"
+                        cdkAutosizeMaxRows="5"
+                        ></textarea>
+            </mat-form-field><br>
+            <button mat-raised-button type="submit" color='primary'>
+                <mat-icon>save</mat-icon>
+            </button>
+        </form>
+    </div>
+</div>
+</div>
