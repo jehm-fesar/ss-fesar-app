@@ -75,7 +75,10 @@ export default class SignUpComponent implements OnInit{
     constructor(){}
     
     ngOnInit(): void {
-        
+        if(this.auth.currentUser?.emailVerified){
+            alert("el correo proporcionado ya fue registrado, contacte con el área de desarrollo de sistemas");
+            this._router.navigate(['/home']);
+        }
     }
 
     async signUp():Promise<void>{
@@ -102,7 +105,7 @@ export default class SignUpComponent implements OnInit{
                                     });
                             });*/
             console.log(credencialUsuario);
-            this._router.navigateByUrl('/');
+            this._router.navigateByUrl('/depto');
         } catch (error) {
             console.error("Error al crear usuario: ",error)
         }

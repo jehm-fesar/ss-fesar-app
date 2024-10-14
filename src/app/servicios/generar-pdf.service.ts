@@ -27,9 +27,10 @@ export class GenerarPDFService {
 
   //constructor(private deptoServicio: DepartamentoService){}
 
-  static async generaPDF_ST(sst: SolicitudSTI, depto: Departamento, folio: string, id:string){
+  static  generaPDF_ST(sst: SolicitudSTI, depto: Departamento, folio: string, id:string){
   //static generaPDF_ST(sst: SolicitudSTI, depto: Departamento, folio: number){
     //this.titularDepto = await this.deptoServicio.getTitular("JARDINERÍA Y TRANSPORTES","st");
+    console.log("solicitud: ", sst);
     const documentDefinition = { 
       pageSize: 'LETTER',
       pageMargins: [ 48, 20, 48, 10 ],
@@ -174,16 +175,16 @@ export class GenerarPDFService {
            widths:[60,60,117,53,53,54,54],
            body:[
                [
-               { text: 'LOCAL', fontSize: 8, alignment: 'center', fillColor: this.subrayarLocal(sst.tServicio), border:[true, false, false, false]},
-               { text: 'PASAJEROS', fontSize: 8, alignment: 'center', fillColor: this.subrayarPasajeros(sst.tTransporte), border:[false, false, true, false]},
+               { text: 'LOCAL', fontSize: 8, alignment: 'center', fillColor: String(this.subrayarLocal(sst.tServicio)), border:[true, false, false, false]},
+               { text: 'PASAJEROS', fontSize: 8, alignment: 'center', fillColor: String(this.subrayarPasajeros(sst.tTransporte)), border:[false, false, true, false]},
                { rowSpan: 2, text: '\n'+sst.nPasajeros, fontSize: 8, alignment: 'center', border:[false, false, false, false]},
                { text: 'FECHA:', fontSize: 8, alignment: 'right', border:[true, false, false, false]},
                { text: sst.salidaSt, fontSize: 8, alignment: 'center', border:[false, false, false, true]},
                { text: 'FECHA:', fontSize: 8, alignment: 'right', border:[false, false, false, false]},
                { text: sst.regresoSt, fontSize: 8, alignment: 'center', border:[false, false, true, true]}
              ],[
-               { text: 'FÓRANEO', fontSize: 8, alignment: 'center', fillColor: this.subrayarForaneo(sst.tServicio), border:[true, false, false, false]},
-               { text: 'CARGA', fontSize: 8, alignment: 'center', fillColor: this.subrayarCarga(sst.tTransporte), border:[false, false, true, false]},
+               { text: 'FÓRANEO', fontSize: 8, alignment: 'center', fillColor: String(this.subrayarForaneo(sst.tServicio)), border:[true, false, false, false]},
+               { text: 'CARGA', fontSize: 8, alignment: 'center', fillColor: String(this.subrayarCarga(sst.tTransporte)), border:[false, false, true, false]},
                { text: '', fontSize: 8, alignment: 'center', border:[false, false, false, false]},
                { text: 'HORA:', fontSize: 8, alignment: 'right', border:[true, false, false, false]},
                { text: sst.horaS, fontSize: 8, alignment: 'center', border:[false, false, false, true]},
@@ -433,8 +434,8 @@ export class GenerarPDFService {
             body:[
               [ {
                 colSpan:9,
-                text: "DESCRIPCIÓN DEL SERVICIO",
-                fontSize: 8, alignment: 'center', fillColor: "gray",
+                text: "DESCRIPCIÓN DEL SERVICIO", color:"#cda434",
+                fontSize: 8, alignment: 'center', fillColor: "#060229",
                 border:[false, false, false, false],
                 },{text:""},{text:""},{text:""},{text:""},{text:""},{text:""},{text:""},{text:""}
               ],[
@@ -550,7 +551,7 @@ export class GenerarPDFService {
                 },{ colSpan: 3, text:"FECHA COMPROMISO DE ENTREGA:", 
                   fontSize: 8, alignment: "right"
                 },{ text:"", fontSize:8 },{ text: "", fontSize:8 },
-                { text: ssc.entrega, fontSize:8, alignment: "center", fillColor:"magenta"}
+                { text: ssc.entrega, fontSize:8, alignment: "center", fillColor:"#f4d03f"}
               ]
             ]
           }
@@ -726,39 +727,40 @@ static subrayarOficioSobres(tc: string):string {
     else return this.color="";
   }
   static subrayarNo(anexo: string):string{
-    if (anexo==='false') return this.color="green";
+    if (anexo==='false') return this.color="#566573";
     else return this.color="";
   }
 
   static subrayarLocal(idtst: string):string{
-    if(idtst=='LOCAL'){
-      return this.color='yellow';
+    if(idtst=="LOCAL"){
+      return this.color="#f4d03f";
     }else{
-      return this.color='';
+      return this.color="";
     }
   }
 
   static subrayarForaneo(tServicio: string):string{
-    if(tServicio=='FORÁNEO'){
-      return this.color='yellow';
-    }else{
-      return this.color='';
-    }
+        if(tServicio=="FORÁNEO"){
+          return this.color="#f4d03f ";
+        }else{
+          return this.color="";
+        }
   }
 
   static subrayarPasajeros(tt: string):string{
-    if(tt=="PASAJEROS"){
-      return this.color='magenta';
-    }else{
-      return this.color='';
-    }
+        if(tt=="PASAJEROS"){
+          return this.color="#566573";
+        }else{
+          return this.color="";
+        }
+
   }
 
-  static subrayarCarga(idtt: string):string{
-    if(idtt=='CARGA'){
-      return this.color='magenta';
+  static subrayarCarga(tt: string):string{
+    if(tt=="CARGA"){
+      return this.color="magenta";
     }else{
-      return this.color='';
+      return this.color="";
     }
   }
   

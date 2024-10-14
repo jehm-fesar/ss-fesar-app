@@ -33,7 +33,8 @@ import { ValidarFechas } from '../../../../servicios/validarFechas';
     MatCardModule,
   ],
   templateUrl: './allsscp.component.html',
-  styleUrl: './allsscp.component.scss'
+  styleUrl: './allsscp.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AllsscpComponent implements OnInit{
   private authServicio = inject(AuthService);
@@ -60,22 +61,26 @@ export class AllsscpComponent implements OnInit{
   dataSource = new ExampleDataSource(this.dataToDisplay);
 
   constructor(private router: Router){}
+
   async ngOnInit(): Promise <void> {
-    this.credencialUsuarioActual = await this.authServicio.estadoUsuarioActual();
-    this.deptoSolicitante = await this.deptoServicios.getDeptoClass(this.credencialUsuarioActual.uid);
-    this.deptos = await this.deptoServicios.getDeptos();
-    if(this.deptoSolicitante.departamento=="JARDINERÍA Y TRANSPORTES"){
-      this.arrSscpI = await this.servicios.getAllSS("scp");
-      console.log("this.arrSscpI: ", this.arrSscpI);
-      this.arrSscpIcambio = await CambiarVariables.cambiarDepartamento_id_x_Departamento(this.arrSscpI,this.deptos);
-      console.log("cambio de id por depto: ", this.arrSscpIcambio);
-      this.dataSource.setData(this.arrSscpIcambio);
-    }else{
-      this.arrSscpI = await this.servicios.getAllSSbyIdDepto(this.credencialUsuarioActual.uid,"scp");
-      this.dataSource.setData(this.arrSscpI);
-      this.arrSscpIcambio = await CambiarVariables.cambiarDepartamento_id_x_Departamento(this.arrSscpI,this.deptos);
-      console.log("this.arrSscpI: ", this.arrSscpI);
-    }
+    return await new Promise(async(resuelve)=>{
+      this.credencialUsuarioActual = await this.authServicio.estadoUsuarioActual();
+      this.deptoSolicitante = await this.deptoServicios.getDeptoClass(this.credencialUsuarioActual.uid);
+      this.deptos = await this.deptoServicios.getDeptos();
+      if(this.deptoSolicitante.departamento=="JARDINERÍA Y TRANSPORTES"){
+        this.arrSscpI = await this.servicios.getAllSS("scp");
+        console.log("this.arrSscpI: ", this.arrSscpI);
+        this.arrSscpIcambio = await CambiarVariables.cambiarDepartamento_id_x_Departamento(this.arrSscpI,this.deptos);
+        console.log("cambio de id por depto: ", this.arrSscpIcambio);
+        this.dataSource.setData(this.arrSscpIcambio);
+      }else{
+        this.arrSscpI = await this.servicios.getAllSSbyIdDepto(this.credencialUsuarioActual.uid,"scp");
+        this.dataSource.setData(this.arrSscpI);
+        this.arrSscpIcambio = await CambiarVariables.cambiarDepartamento_id_x_Departamento(this.arrSscpI,this.deptos);
+        console.log("this.arrSscpI: ", this.arrSscpI);
+      }
+      return resuelve();
+    });
   }
 
   toHome(){ this.router.navigate(["home"]); }
@@ -90,6 +95,7 @@ export class AllsscpComponent implements OnInit{
     //---this.limpiarFormulario();
     //console.log("presionó en add(): ", this.servicios.selectedSC);
     //---this.openModal();
+    this.router.navigate(['/solicitudes/scp']);
   }
 
   async editar(element:any){

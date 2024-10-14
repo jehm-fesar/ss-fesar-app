@@ -1,4 +1,15 @@
-<mat-toolbar>
-    <span>HOME</span>
+<header><mat-toolbar>
+    <span>SISTEMA DE GESTIÓN DE SERVICIOS</span>
+    <button mat-button [matMenuTriggerFor]="menuu">Solicitudes</button>
+    <mat-menu #menuu="matMenu">
+        <button mat-menu-item (click)="sts()">Transporte</button>
+        <a mat-menu-item (click)="scps()">Correspondencia y Paquetería</a>
+    </mat-menu>
+
     <button mat-flat-button (click)="logOut()">Log out</button>
 </mat-toolbar>
+</header>
+
+<!--div class="container">
+    <router-outlet></router-outlet>
+</div-->

@@ -88,19 +88,24 @@ export class DepartamentoComponent implements OnInit{
       validators: [],
       nonNullable: true,
     }),
-    psw: this.formBuilder.control('', {
+    /*psw: this.formBuilder.control('', {
       validators: [Validators.required],
       nonNullable: true,
-    }),
+    }),*/
   });
 
   constructor(){}
 
-  ngOnInit(): void {
+  async ngOnInit(): Promise<void> {
     //const credencialUID = this.usuario?.uid;
     //console.log("UID desde el ngOnInit: ", credencialUID);
-    console.log("Depto UID: ", this.iddepto);
-    console.log("Depto email: ", this.correo);
+
+    if(this.auth.currentUser?.emailVerified){
+      this.router.navigate(['/home']);
+    }else{
+      console.log("Depto UID: ", this.iddepto);
+      console.log("Depto email: ", this.correo);
+    }
   }
   async guardar(){
     if(this.form.invalid){
@@ -118,6 +123,8 @@ export class DepartamentoComponent implements OnInit{
       console.log("Depto interface: ", this.deptoIfc);
 
       this.deptoServicio.addDepto(this.deptoIfc);
+      this.authServicio.logOut();
+      alert("Antes de acceder al sistema valide su correo electrónico y vuelva a acceder con sus credenciales");
       this.router.navigate(['/']);
     }
 

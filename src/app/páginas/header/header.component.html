@@ -1,0 +1,43 @@
+<header>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3 col-sm-3 col-3">
+                <div class="logo-container">
+                    <img src="" alt="" class="logo">
+                </div>
+            </div>
+            <div class="col-md-9 col-sm-9 col-9 text-end">
+                <div class="menu-icon" (click)="openMenu()">
+                    <i class="{{menuIcon}}"></i>
+                </div>
+                <div class="desktop_menu" [class.mobile_menu]="menuValue">
+                    <ul>
+                        <li>Home</li>
+                        <li>About</li>
+                        <li>Solicitudes
+                        </li>
+                        <li>Contacto</li>
+                        <li *ngIf="usuarioActual; else login" (click)="logOut()">Salir</li>
+                        <ng-template #login><li></li></ng-template>
+                    </ul>
+
+                    <!--form action="submit" class="d-flex">
+                        <ul class="navbar-nav me-auto" *ngIf="this.usuarioActual$ | async as user;else login">
+                            <li class="nav-item">
+                                <a href="" class="nav-link">{{ user?.email}}</a>
+                            </li>
+                            <li class="nav-item" *ngIf="user">
+                                <a href="" class="nav-link" (click)="logOut()">
+                                    <mat-icon>logout</mat-icon>
+                                </a>
+                            </li>
+                        </ul>
+                        <ng-template #login>
+
+                        </ng-template>
+                    </form-->
+                </div>
+            </div>
+        </div>
+    </div>
+</header>

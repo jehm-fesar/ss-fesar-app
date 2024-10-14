@@ -31,7 +31,6 @@ export interface CredentialUID{
 
 export class AuthService {
   private auth: Auth = inject(Auth);
-  //private usuario = this.auth.currentUser;
 
   readonly authState$ = authState(this.auth);
 
@@ -43,12 +42,19 @@ export class AuthService {
       credencial.email, credencial.psw);
   }
 
-  async logInWithEmailAndPassword(credencial: Credencial):Promise<UserCredential>{
-    return await signInWithEmailAndPassword(
-      this.auth,
-      credencial.email,
-      credencial.psw
-    );
+  async logInWithEmailAndPassword(credencial: Credencial):Promise<UserCredential|any>{
+    return await new Promise (async (resuelve, rechaza)=>{
+      try {
+        signInWithEmailAndPassword(
+          this.auth,
+          credencial.email,
+          credencial.psw
+        ).finally(()=>{ return resuelve(credencial); }); 
+         
+      } catch (error) {
+        return await rechaza(error);
+      }
+    });
   }
 
   logOut():Promise<void>{

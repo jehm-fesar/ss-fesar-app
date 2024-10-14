@@ -48,17 +48,22 @@ export default class LoginComponent implements OnInit{
     }
     
     async logIn():Promise<void>{
-        if(this.form.invalid) return;
-        console.log(this.form.value);
-        const credencial: Credencial = {
-            email: this.form.value.email || '',
-            psw:  this.form.value.psw || '' 
-        };
+        return await new Promise(async(resuelve,rechaza)=>{
+            if(this.form.invalid) return resuelve();
+            console.log(this.form.value);
+            const credencial: Credencial = {
+                email: this.form.value.email || '',
+                psw:  this.form.value.psw || '' 
+            };
         try {
             await this.authServicio.logInWithEmailAndPassword(credencial);
-            this._router.navigateByUrl('/');
+            await this._router.navigateByUrl('/');
+            return await resuelve();
         } catch (error) {
-            
+            return rechaza(error);    
         }
+        });
+
+        
     }
 }
